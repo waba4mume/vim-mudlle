@@ -1,0 +1,5 @@
+addon: mudlle-syntax
+description: Syntax support for the Mudlle language
+files:
+  - syntax/mudlle.vim
+  - ftplugin/mudlle.vim
