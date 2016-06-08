@@ -20,27 +20,16 @@ syn match   mudlleLineComment       "\/\/.*" contains=@Spell,mudlleCommentTodo
 syn match   mudlleCommentSkip       "^[ \t]*\*\($\|[ \t]\+\)"
 syn region  mudlleComment           start="/\*"  end="\*/" contains=@Spell,mudlleCommentTodo
 syn match   mudlleSpecial           "\\."
-syn region  mudlleStringD           start=+"+  skip=+\\\\\|\\"+  end=+"\|$+  contains=mudlleSpecial,@htmlPreproc
+syn region  mudlleStringD           start=+"+  skip=+\\\\\|\\"+  end=+"\|$+  contains=mudlleSpecial
 "syn match   mudlleLabel             start="<" end=">"
 syn match   mudlleNumber            "-\?\<\d\+\>"
 syn match   mudlleStatement         "exit\(<[\w?!]\+>\)\?"
 
 syn keyword mudlleConditional       if else
-syn keyword mudlleRepeat            while loop
-"syn keyword mudlleBranch            break continue
-"syn keyword mudlleOperator          new delete instanceof typeof
-"syn keyword mudlleType              Array Boolean Date Function Number Object String RegExp
-"syn keyword mudlleStatement         exit
+syn keyword mudlleRepeat            for while loop
 syn keyword mudlleBoolean           true false
-syn keyword mudlleNull              null NULL
-"syn keyword mudlleIdentifier        actor
-"syn keyword mudlleLabel             case default
-"syn keyword mudlleException         try catch finally throw
-"syn keyword mudlleMessage           alert confirm prompt status
+syn keyword mudlleNull              null
 syn keyword mudlleGlobal            actor
-"syn keyword mudlleMember            document event location 
-"syn keyword mudlleDeprecated        escape unescape
-"syn keyword mudlleReserved          abstract boolean byte char class const debugger double enum export extends final float goto implements import int interface long native package private protected public short static super synchronized throws transient volatile 
 
 syn keyword mudlleFunction          fn
 syn match   mudlleBraces            "[\[\]]"
