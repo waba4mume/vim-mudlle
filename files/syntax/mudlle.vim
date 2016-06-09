@@ -27,6 +27,7 @@ syn match   mudlleStatement         "exit\(<[\w?!]\+>\)\?"
 
 syn keyword mudlleConditional       if else
 syn keyword mudlleRepeat            for while loop
+syn keyword mudlleMatch             match
 syn keyword mudlleBoolean           true false
 syn keyword mudlleNull              null
 syn keyword mudlleGlobal            actor
