@@ -18,7 +18,7 @@ endif
 syn keyword mudlleCommentTodo       TODO FIXME XXX TBD contained
 syn match   mudlleLineComment       "\/\/.*" contains=@Spell,mudlleCommentTodo
 syn match   mudlleCommentSkip       "^[ \t]*\*\($\|[ \t]\+\)"
-syn region  mudlleComment           start="/\*"  end="\*/" contains=@Spell,mudlleCommentTodo
+syn region  mudlleComment           start="/\*"  end="\*/" contains=@Spell,mudlleCommentTodo,mudlleComment
 syn match   mudlleSpecial           "\\."
 syn region  mudlleStringD           start=+"+  skip=+\\\\\|\\"+  end=+"\|$+  contains=mudlleSpecial
 "syn match   mudlleLabel             start="<" end=">"
