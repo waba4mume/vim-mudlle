@@ -32,6 +32,8 @@ syn keyword mudlleBoolean           true false
 syn keyword mudlleNull              null
 syn keyword mudlleGlobal            actor
 
+syn keyword mudlleModule            library module requires reads writes static defines
+
 syn keyword mudlleFunction          fn
 syn match   mudlleBraces            "[\[\]]"
 syn match   mudlleParens            "[()]"
