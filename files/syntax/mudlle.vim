@@ -25,14 +25,17 @@ syn region  mudlleStringD           start=+"+  skip=+\\\\\|\\"+  end=+"\|$+  con
 syn match   mudlleNumber            "-\?\<\d\+\>"
 syn match   mudlleStatement         "exit\(<[\w?!]\+>\)\?"
 
+" Highlight keywords in the module header, only if they are used in the correct
+" order and with no stray comma.
+syn match   mudlleModHead           /\v^%(module|library)\s+\i+\_s+%(^requires\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^defines\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^reads\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^writes\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^static\_s+%(\i+,\_s+)*\i{-}\_s+)?/ contains=mudlleModKeyword transparent
+syn keyword mudlleModKeyword        module library requires defines reads writes static contained
+
 syn keyword mudlleConditional       if else
 syn keyword mudlleRepeat            for while loop
 syn keyword mudlleMatch             match
 syn keyword mudlleBoolean           true false
 syn keyword mudlleNull              null
 syn keyword mudlleGlobal            actor
-
-syn keyword mudlleModule            library module requires reads writes static defines
 
 syn keyword mudlleFunction          fn
 syn match   mudlleBraces            "[\[\]]"
@@ -80,6 +83,7 @@ if version >= 508 || !exists("did_mudlle_syn_inits")
   HiLink mudlleMessage          Keyword
   HiLink mudlleGlobal           Keyword
   HiLink mudlleMember           Keyword
+  HiLink mudlleModKeyword       Keyword
   HiLink mudlleDeprecated       Exception 
   HiLink mudlleReserved         Keyword
   HiLink mudlleDebug            Debug
