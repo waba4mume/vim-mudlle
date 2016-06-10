@@ -17,19 +17,19 @@ endif
 
 syn keyword mudlleCommentTodo       TODO FIXME XXX TBD contained
 syn match   mudlleLineComment       "\/\/.*" contains=@Spell,mudlleCommentTodo
-syn match   mudlleCommentSkip       "^[ \t]*\*\($\|[ \t]\+\)"
 syn region  mudlleComment           start="/\*"  end="\*/" contains=@Spell,mudlleCommentTodo,mudlleComment
+
 syn match   mudlleSpecial           "\\."
 syn region  mudlleStringD           start=+"+  skip=+\\\\\|\\"+  end=+"\|$+  contains=mudlleSpecial
-"syn match   mudlleLabel             start="<" end=">"
+
 syn match   mudlleNumber            "-\?\<\d\+\>"
-syn match   mudlleStatement         "exit\(<[\w?!]\+>\)\?"
 
 " Highlight keywords in the module header, only if they are used in the correct
 " order and with no stray comma.
 syn match   mudlleModHead           /\v^%(module|library)\s+\i+\_s+%(^requires\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^defines\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^reads\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^writes\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^static\_s+%(\i+,\_s+)*\i{-}\_s+)?/ contains=mudlleModKeyword transparent
 syn keyword mudlleModKeyword        module library requires defines reads writes static contained
 
+syn match   mudlleStatement         "exit\(<[\w?!]\+>\)\?"
 syn keyword mudlleConditional       if else
 syn keyword mudlleRepeat            for while loop
 syn keyword mudlleMatch             match
@@ -39,7 +39,6 @@ syn keyword mudlleGlobal            actor
 
 syn keyword mudlleFunction          fn
 syn match   mudlleBraces            "[\[\]]"
-syn match   mudlleParens            "[()]"
 
 syn sync fromstart
 syn sync maxlines=100
