@@ -23,6 +23,7 @@ syn match   mudlleSpecial           "\\."
 syn region  mudlleStringD           start=+"+  skip=+\\\\\|\\"+  end=+"\|$+  contains=mudlleSpecial
 
 syn match   mudlleNumber            "-\?\<\d\+\>"
+syn match   mudlleCharacter         /\v\i@<!\?.\i@!/hs=s+1
 
 " Highlight keywords in the module header, only if they are used in the correct
 " order and with no stray comma.
