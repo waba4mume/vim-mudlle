@@ -27,7 +27,8 @@ syn match   mudlleCharacter         /\v\i@<!\?.\i@!/hs=s+1
 
 " Highlight keywords in the module header, only if they are used in the correct
 " order and with no stray comma.
-syn match   mudlleModHead           /\v^%(module|library)\s+\i+\_s+%(^requires\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^defines\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^reads\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^writes\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^static\_s+%(\i+,\_s+)*\i{-}\_s+)?/ contains=mudlleModKeyword transparent
+syn match   mudlleModule            /\v^module\s+\i+\_s+%(^requires\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^reads\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^writes\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^static\_s+%(\i+,\_s+)*\i{-}\_s+)?/ contains=mudlleModKeyword transparent
+syn match   mudlleLibrary           /\v^library\s+\i+\_s+%(^requires\_s+%(\i+,\_s+)*\i{-}\_s+)?^defines\_s+%(\i+,\_s+)*\i{-}\_s+%(^reads\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^writes\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^static\_s+%(\i+,\_s+)*\i{-}\_s+)?/ contains=mudlleModKeyword transparent
 syn keyword mudlleModKeyword        module library requires defines reads writes static contained
 
 syn match   mudlleStatement         "exit\(<[\w?!]\+>\)\?"
