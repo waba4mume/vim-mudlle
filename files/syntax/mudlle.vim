@@ -39,8 +39,10 @@ syn keyword mudlleBoolean           true false
 syn keyword mudlleNull              null
 syn keyword mudlleGlobal            actor
 
-syn keyword mudlleFunction          fn
-syn match   mudlleBraces            "[\[\]]"
+" is a match (not a kw) to be lower priority than mudlleFunctionReg
+syn match   mudlleFunction          /\v<fn>/
+syn region  mudlleBraces            start=/\[/ end=/\]/ contains=ALL
+syn region  mudlleFunctionReg       start=/\v<fn\_s+%("%(\\"|[^"])*")?\_s*%(\i+|\([^)]*\))\_s*\[/rs=s+2 end=/\z1\]/ fold transparent contains=ALL
 
 syn sync fromstart
 syn sync maxlines=100
