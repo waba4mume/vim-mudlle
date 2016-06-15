@@ -35,9 +35,15 @@ syn match   mudlleCharacter         /\v\i@<!\?.\i@!/hs=s+1
 
 " Highlight keywords in the module header, only if they are used in the correct
 " order and with no stray comma.
-syn match   mudlleModule            /\v^module\s+\i+\_s+%(^requires\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^reads\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^writes\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^static\_s+%(\i+,\_s+)*\i{-}\_s+)?/ contains=mudlleModKeyword transparent
-syn match   mudlleLibrary           /\v^library\s+\i+\_s+%(^requires\_s+%(\i+,\_s+)*\i{-}\_s+)?^defines\_s+%(\i+,\_s+)*\i{-}\_s+%(^reads\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^writes\_s+%(\i+,\_s+)*\i{-}\_s+)?%(^static\_s+%(\i+,\_s+)*\i{-}\_s+)?/ contains=mudlleModKeyword transparent
-syn keyword mudlleModKeyword        module library requires defines reads writes static contained
+syn match   mudlleModModule         /\v^module\s+\i+/he=s+6 nextgroup=mudlleModRequiresM,mudlleModReads,mudlleModWrites,mudlleModStatic skipwhite skipempty
+syn match   mudlleModLibrary        /\v^library\s+\i+/he=s+7 nextgroup=mudlleModRequiresL,mudlleModDefines skipwhite skipempty
+syn region  mudlleModRequiresM      start=/^requires/ end=// nextgroup=mudlleModReads,mudlleModWrites,mudlleModStatic skipwhite skipempty contained contains=mudlleModRequires transparent
+syn region  mudlleModRequiresL      start=/^requires/ end=// nextgroup=mudlleModDefines skipwhite skipempty contained contains=mudlleModRequires transparent
+syn match   mudlleModRequires       /\v^requires\_s+%(\i+,\_s+)*\i+/he=s+8 contained
+syn match   mudlleModDefines        /\v^defines\_s+%(\i+,\_s+)*\i+/he=s+7 nextgroup=mudlleModReads,mudlleModWrites,mudlleModStatic skipwhite skipempty contained
+syn match   mudlleModReads          /\v^reads\_s+%(\i+,\_s+)*\i+/he=s+5 nextgroup=mudlleModWrites,mudlleModStatic skipwhite skipempty contained
+syn match   mudlleModWrites         /\v^writes\_s+%(\i+,\_s+)*\i+/he=s+6 nextgroup=mudlleModStatic skipwhite skipempty contained
+syn match   mudlleModStatic         /\v^static\_s+%(\i+,\_s+)*\i+/he=s+6 contained
 
 syn match   mudlleStatement         "exit\(<[\w?!]\+>\)\?"
 syn keyword mudlleConditional       if else
@@ -96,7 +102,13 @@ if version >= 508 || !exists("did_mudlle_syn_inits")
   HiLink mudlleMessage          Keyword
   HiLink mudlleGlobal           Keyword
   HiLink mudlleMember           Keyword
-  HiLink mudlleModKeyword       Keyword
+  HiLink mudlleModModule        Keyword
+  HiLink mudlleModLibrary       Keyword
+  HiLink mudlleModRequires      Keyword
+  HiLink mudlleModDefines       Keyword
+  HiLink mudlleModReads         Keyword
+  HiLink mudlleModWrites        Keyword
+  HiLink mudlleModStatic        Keyword
   HiLink mudlleDeprecated       Exception 
   HiLink mudlleReserved         Keyword
   HiLink mudlleDebug            Debug
