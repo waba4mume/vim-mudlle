@@ -27,8 +27,8 @@ syn keyword mudlleCommentTodo       TODO FIXME XXX TBD contained
 syn match   mudlleLineComment       "\/\/.*" contains=@Spell,mudlleCommentTodo
 syn region  mudlleComment           start="/\*"  end="\*/" contains=@Spell,mudlleCommentTodo,mudlleComment
 
-syn match   mudlleSpecial           "\\."
-syn region  mudlleString            start=+"+  skip=+\\\\\|\\"+  end=+"\|$+  contains=mudlleSpecial
+syn match   mudlleSpecial           "\\." contained
+syn region  mudlleString            start=/"/  skip=/\v\\%(\\|"|\n)/  end=/\v"|$/  contains=mudlleSpecial
 
 syn match   mudlleNumber            "-\?\<\d\+\>"
 syn match   mudlleCharacter         /\v\i@<!\?.\i@!/hs=s+1
