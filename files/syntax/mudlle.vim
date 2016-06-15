@@ -4,7 +4,15 @@
 " Updaters: 
 " URL:      
 " Changes:  
-" Last Change:  2011-05-06
+" Last Change:  2016-06-xx
+
+" Tricks used in this file:
+" - The wrapping region: it is usually transparent, has an empty end pattern
+"   and a contains list. It serves as a specific wrapper for the contained generic
+"   item, for example to name it as part of a syntax chain.
+" - Syntax chain: a set of nextgroup-chained items, usually with skipwhite and
+"   skipempty. All items except the first are contained, to enforce the nextgroup.
+"   It expresses a syntax sequence in a more radable form than a long regexp.
 
 if !exists("main_syntax")
   if version < 600
@@ -20,7 +28,7 @@ syn match   mudlleLineComment       "\/\/.*" contains=@Spell,mudlleCommentTodo
 syn region  mudlleComment           start="/\*"  end="\*/" contains=@Spell,mudlleCommentTodo,mudlleComment
 
 syn match   mudlleSpecial           "\\."
-syn region  mudlleStringD           start=+"+  skip=+\\\\\|\\"+  end=+"\|$+  contains=mudlleSpecial
+syn region  mudlleString            start=+"+  skip=+\\\\\|\\"+  end=+"\|$+  contains=mudlleSpecial
 
 syn match   mudlleNumber            "-\?\<\d\+\>"
 syn match   mudlleCharacter         /\v\i@<!\?.\i@!/hs=s+1
@@ -38,11 +46,13 @@ syn keyword mudlleMatch             match
 syn keyword mudlleBoolean           true false
 syn keyword mudlleNull              null
 syn keyword mudlleGlobal            actor
+syn keyword mudlleType              int string table vector list null character object contained
 
-" is a match (not a kw) to be lower priority than mudlleFunctionReg
-syn match   mudlleFunction          /\v<fn>/
-syn region  mudlleBraces            start=/\[/ end=/\]/ contains=ALL
-syn region  mudlleFunctionReg       start=/\v<fn\_s+%("%(\\"|[^"])*")?\_s*%(\i+|\([^)]*\))\_s*\[/rs=s+2 end=/\z1\]/ fold transparent contains=ALL
+syn keyword mudlleFunction          fn nextgroup=mudlleFunctionHelpStr,mudlleFunctionArgs skipwhite skipempty
+syn region  mudlleFunctionHelpStr   start=/"/ end=// transparent contains=mudlleString contained nextgroup=mudlleFunctionArgs skipwhite skipempty
+syn match   mudlleFunctionArgs      /\v%(\i+|\(\_[^)]*\))/ contains=mudlleType contained nextgroup=mudlleFunctionBraces skipwhite skipempty
+syn region  mudlleFunctionBraces    start=/\[/ end=// transparent contains=mudlleBracesReg contained fold
+syn region  mudlleBracesReg         matchgroup=mudlleBraces start=/\[/ end=/\]/ contains=TOP
 
 syn sync fromstart
 syn sync maxlines=100
@@ -65,7 +75,7 @@ if version >= 508 || !exists("did_mudlle_syn_inits")
   HiLink mudlleLineComment      Comment
   HiLink mudlleCommentTodo      Todo
   HiLink mudlleSpecial          Special
-  HiLink mudlleStringD          String
+  HiLink mudlleString           String
   HiLink mudlleCharacter        Character
   HiLink mudlleNumber           String
   HiLink mudlleConditional      Conditional
