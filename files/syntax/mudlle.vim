@@ -27,6 +27,9 @@ syn keyword mudlleCommentTodo       TODO FIXME XXX TBD contained
 syn match   mudlleLineComment       "\/\/.*" contains=@Spell,mudlleCommentTodo
 syn region  mudlleComment           start="/\*"  end="\*/" contains=@Spell,mudlleCommentTodo,mudlleComment
 
+" Files starting with ** are meant to be ignored at boot
+syn match   mudlleDoNotLoad         /\v%^\*\*.*/
+
 syn match   mudlleSpecial           "\\." contained
 syn match   mudlleFnHelpVar         /\v`\i+/hs=s+1 contained
 syn region  mudlleString            start=/"/  skip=/\v\\%(\\|"|\n)/  end=/\v"|$/  contains=mudlleSpecial,mudlleFnHelpVar
@@ -94,7 +97,7 @@ if version >= 508 || !exists("did_mudlle_syn_inits")
   HiLink mudlleStatement        Statement
   HiLink mudlleFunction         Function
   HiLink mudlleBraces           Function
-  HiLink mudlleError            Error
+  HiLink mudlleDoNotLoad        Error
   HiLink mudlleNull             Keyword
   HiLink mudlleBoolean          Boolean
 
