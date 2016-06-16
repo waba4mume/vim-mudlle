@@ -28,7 +28,8 @@ syn match   mudlleLineComment       "\/\/.*" contains=@Spell,mudlleCommentTodo
 syn region  mudlleComment           start="/\*"  end="\*/" contains=@Spell,mudlleCommentTodo,mudlleComment
 
 syn match   mudlleSpecial           "\\." contained
-syn region  mudlleString            start=/"/  skip=/\v\\%(\\|"|\n)/  end=/\v"|$/  contains=mudlleSpecial
+syn match   mudlleFnHelpVar         /\v`\i+/hs=s+1 contained
+syn region  mudlleString            start=/"/  skip=/\v\\%(\\|"|\n)/  end=/\v"|$/  contains=mudlleSpecial,mudlleFnHelpVar
 
 syn match   mudlleNumber            "-\?\<\d\+\>"
 syn match   mudlleCharacter         /\v\i@<!\?.\i@!/hs=s+1
@@ -96,7 +97,7 @@ if version >= 508 || !exists("did_mudlle_syn_inits")
   HiLink mudlleNull             Keyword
   HiLink mudlleBoolean          Boolean
 
-  HiLink mudlleIdentifier       Identifier
+  HiLink mudlleFnHelpVar        Identifier
   HiLink mudlleLabel            Label
   HiLink mudlleException        Exception
   HiLink mudlleMessage          Keyword
