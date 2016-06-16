@@ -1,5 +1,8 @@
-set sts=4
-set sw=4
-set ts=8
-set et
-set cc=+1
+" Only do this when not done yet for this buffer
+if exists("b:did_ftplugin")
+    finish
+endif
+let b:did_ftplugin = 1
+
+setlocal iskeyword=@,48-57,_,?,!,:
+let b:undo_ftplugin = "setlocal iskeyword<"

@@ -31,24 +31,24 @@ syn region  mudlleComment           start="/\*"  end="\*/" contains=@Spell,mudll
 syn match   mudlleDoNotLoad         /\v%^\*\*.*/
 
 syn match   mudlleSpecial           "\\." contained
-syn match   mudlleFnHelpVar         /\v`\i+/hs=s+1 contained
+syn match   mudlleFnHelpVar         /\v`\k+/hs=s+1 contained
 syn region  mudlleString            start=/"/  skip=/\v\\%(\\|"|\n)/  end=/\v"|$/  contains=mudlleSpecial,mudlleFnHelpVar
 
 syn match   mudlleNumber            "-\?\<\d\+\>"
 " A lone ?x is C's 'x'. x may also be a \-sequence like \r
-syn match   mudlleCharacter         /\v\i@<!\?\\?.\i@!/hs=s+1
+syn match   mudlleCharacter         /\v\k@<!\?\\?.\k@!/hs=s+1
 
 " Highlight keywords in the module header, only if they are used in the correct
 " order and with no stray comma.
-syn match   mudlleModModule         /\v^module\s+\i+/he=s+6 nextgroup=mudlleModRequiresM,mudlleModReads,mudlleModWrites,mudlleModStatic skipwhite skipempty
-syn match   mudlleModLibrary        /\v^library\s+\i+/he=s+7 nextgroup=mudlleModRequiresL,mudlleModDefines skipwhite skipempty
+syn match   mudlleModModule         /\v^module\s+\k+/he=s+6 nextgroup=mudlleModRequiresM,mudlleModReads,mudlleModWrites,mudlleModStatic skipwhite skipempty
+syn match   mudlleModLibrary        /\v^library\s+\k+/he=s+7 nextgroup=mudlleModRequiresL,mudlleModDefines skipwhite skipempty
 syn region  mudlleModRequiresM      start=/^requires/ end=// nextgroup=mudlleModReads,mudlleModWrites,mudlleModStatic skipwhite skipempty contained contains=mudlleModRequires transparent
 syn region  mudlleModRequiresL      start=/^requires/ end=// nextgroup=mudlleModDefines skipwhite skipempty contained contains=mudlleModRequires transparent
-syn match   mudlleModRequires       /\v^requires\_s+%(\i+,\_s+)*\i+/he=s+8 contained
-syn match   mudlleModDefines        /\v^defines\_s+%(\i+,\_s+)*\i+/he=s+7 nextgroup=mudlleModReads,mudlleModWrites,mudlleModStatic skipwhite skipempty contained
-syn match   mudlleModReads          /\v^reads\_s+%(\i+,\_s+)*\i+/he=s+5 nextgroup=mudlleModWrites,mudlleModStatic skipwhite skipempty contained
-syn match   mudlleModWrites         /\v^writes\_s+%(\i+,\_s+)*\i+/he=s+6 nextgroup=mudlleModStatic skipwhite skipempty contained
-syn match   mudlleModStatic         /\v^static\_s+%(\i+,\_s+)*\i+/he=s+6 contained
+syn match   mudlleModRequires       /\v^requires\_s+%(\k+,\_s+)*\k+/he=s+8 contained
+syn match   mudlleModDefines        /\v^defines\_s+%(\k+,\_s+)*\k+/he=s+7 nextgroup=mudlleModReads,mudlleModWrites,mudlleModStatic skipwhite skipempty contained
+syn match   mudlleModReads          /\v^reads\_s+%(\k+,\_s+)*\k+/he=s+5 nextgroup=mudlleModWrites,mudlleModStatic skipwhite skipempty contained
+syn match   mudlleModWrites         /\v^writes\_s+%(\k+,\_s+)*\k+/he=s+6 nextgroup=mudlleModStatic skipwhite skipempty contained
+syn match   mudlleModStatic         /\v^static\_s+%(\k+,\_s+)*\k+/he=s+6 contained
 
 syn match   mudlleStatement         "exit\(<[\w?!]\+>\)\?"
 syn keyword mudlleConditional       if else
@@ -61,7 +61,7 @@ syn keyword mudlleType              int string table vector list null character 
 
 syn keyword mudlleFunction          fn nextgroup=mudlleFunctionHelpStr,mudlleFunctionArgs skipwhite skipempty
 syn region  mudlleFunctionHelpStr   start=/"/ end=// transparent contains=mudlleString contained nextgroup=mudlleFunctionArgs skipwhite skipempty
-syn match   mudlleFunctionArgs      /\v%(\i+|\(\_[^)]*\))/ contains=mudlleType contained nextgroup=mudlleFunctionBraces skipwhite skipempty
+syn match   mudlleFunctionArgs      /\v%(\k+|\(\_[^)]*\))/ contains=mudlleType contained nextgroup=mudlleFunctionBraces skipwhite skipempty
 syn region  mudlleFunctionBraces    start=/\[/ end=// transparent contains=mudlleBracesReg contained fold
 syn region  mudlleBracesReg         matchgroup=mudlleBraces start=/\[/ end=/\]/ contains=TOP
 
