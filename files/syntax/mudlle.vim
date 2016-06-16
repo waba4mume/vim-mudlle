@@ -32,7 +32,8 @@ syn match   mudlleFnHelpVar         /\v`\i+/hs=s+1 contained
 syn region  mudlleString            start=/"/  skip=/\v\\%(\\|"|\n)/  end=/\v"|$/  contains=mudlleSpecial,mudlleFnHelpVar
 
 syn match   mudlleNumber            "-\?\<\d\+\>"
-syn match   mudlleCharacter         /\v\i@<!\?.\i@!/hs=s+1
+" A lone ?x is C's 'x'. x may also be a \-sequence like \r
+syn match   mudlleCharacter         /\v\i@<!\?\\?.\i@!/hs=s+1
 
 " Highlight keywords in the module header, only if they are used in the correct
 " order and with no stray comma.
