@@ -35,7 +35,7 @@ Follow the instructions at https://github.com/tpope/vim-pathogen.
 Clone the repository somewhere and:
 
 ```
-vim-addons -r .../vim-mudlle/registry -s .../vim-mudlle/files install mudlle-syntax
+vim-addons -r .../vim-mudlle/registry -s .../vim-mudlle install mudlle-syntax
 ```
 
 This is deprecated in favor of Pathogen.
