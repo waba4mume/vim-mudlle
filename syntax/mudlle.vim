@@ -23,6 +23,8 @@ if !exists("main_syntax")
   let main_syntax = 'mudlle'
 endif
 
+syn case ignore
+
 syn keyword mudlleCommentTodo       TODO FIXME XXX TBD contained
 syn match   mudlleLineComment       "\/\/.*" contains=@Spell,mudlleCommentTodo
 syn region  mudlleComment           start="/\*"  end="\*/" contains=@Spell,mudlleCommentTodo,mudlleComment
