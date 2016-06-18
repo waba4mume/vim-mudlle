@@ -28,7 +28,16 @@ that behaviour for all file types that provide syntax-based folding, of course.
 
 ### Pathogen
 
-Follow the instructions at https://github.com/tpope/vim-pathogen.
+Install and enable Pathogen by following the instructions at
+https://github.com/tpope/vim-pathogen. Don't miss the part where you enable it
+in your vimrc!
+
+Then install `vim-mudlle`:
+
+```
+cd ~/.vim/bundle && \
+git clone https://github.com/MUME/vim-mudlle.git
+```
 
 ### vim-addon-manager (Debian)
 
