@@ -6,6 +6,8 @@ What is mudlle? See https://github.com/MUME/mudlle.
 
 - Syntax highlighting.
 - Automatic folding of function bodies.
+- Detects source files that have Emacs' ```-*- Mudlle -*-``` in the first line,
+  as it is the custom in MUME.
 
 ## Tunables
 
