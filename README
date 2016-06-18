@@ -1,5 +1,0 @@
-This is basic support for mudlle in Vim, completed within 1 hour.
-
-vim-addons -r ~/mume/mudlle-vim/registry -s ~/mume/mudlle-vim/files install mudlle-syntax
-
-Also see: ~/.vim/scripts.vim for detection based on the emacs modeline
