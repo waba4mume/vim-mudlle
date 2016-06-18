@@ -59,7 +59,8 @@ syn keyword mudlleMatch             match
 syn keyword mudlleBoolean           true false
 syn keyword mudlleNull              null
 syn keyword mudlleGlobal            actor
-syn keyword mudlleType              int string table vector list null character object contained
+syn keyword mudlleType              code closure variable internal primitive varargs secure integer string vector pair symbol table private object character gone oport mcode float bigint null none any function list int contained
+
 
 syn keyword mudlleFunction          fn nextgroup=mudlleFunctionHelpStr,mudlleFunctionArgs skipwhite skipempty
 syn region  mudlleFunctionHelpStr   start=/"/ end=// transparent contains=mudlleString contained nextgroup=mudlleFunctionArgs skipwhite skipempty
