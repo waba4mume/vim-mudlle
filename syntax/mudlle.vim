@@ -52,7 +52,7 @@ syn match   mudlleModReads          /\v^reads\_s+%(\k+,\_s+)*\k+/he=s+5 nextgrou
 syn match   mudlleModWrites         /\v^writes\_s+%(\k+,\_s+)*\k+/he=s+6 nextgroup=mudlleModStatic skipwhite skipempty contained
 syn match   mudlleModStatic         /\v^static\_s+%(\k+,\_s+)*\k+/he=s+6 contained
 
-syn match   mudlleStatement         "exit\(<[\w?!]\+>\)\?"
+syn match   mudlleStatement         /\v<exit(\<\i+\>|>)/
 syn keyword mudlleConditional       if else
 syn keyword mudlleRepeat            for while loop
 syn keyword mudlleMatch             match
