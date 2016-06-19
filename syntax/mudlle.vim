@@ -58,7 +58,7 @@ syn keyword mudlleRepeat            for while loop
 syn keyword mudlleMatch             match
 syn keyword mudlleBoolean           true false
 syn keyword mudlleNull              null
-syn keyword mudlleGlobal            actor
+syn keyword mudlleActor             actor
 syn keyword mudlleType              code closure variable internal primitive varargs secure integer string vector pair symbol table private object character gone oport mcode float bigint null none any function list int contained
 
 " Matches 'fn' with a possible return type: int fn, {int,list} fn, fn
@@ -110,7 +110,7 @@ if version >= 508 || !exists("did_mudlle_syn_inits")
   HiLink mudlleLabel            Label
   HiLink mudlleException        Exception
   HiLink mudlleMessage          Keyword
-  HiLink mudlleGlobal           Keyword
+  HiLink mudlleActor            Special
   HiLink mudlleMember           Keyword
   HiLink mudlleModModule        Keyword
   HiLink mudlleModLibrary       Keyword
