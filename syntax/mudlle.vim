@@ -61,8 +61,9 @@ syn keyword mudlleNull              null
 syn keyword mudlleGlobal            actor
 syn keyword mudlleType              code closure variable internal primitive varargs secure integer string vector pair symbol table private object character gone oport mcode float bigint null none any function list int contained
 
-
-syn keyword mudlleFunction          fn nextgroup=mudlleFunctionHelpStr,mudlleFunctionArgs skipwhite skipempty
+" Matches 'fn' with a possible return type: int fn, {int,list} fn, fn
+syn match   mudlleFunction          /\v%(%(<\i+>|\{.{-}\})\_s+|<)fn>/ transparent contains=mudlleFunctionKw,mudlleType nextgroup=mudlleFunctionHelpStr,mudlleFunctionArgs skipwhite skipempty
+syn keyword mudlleFunctionKw        fn contained
 syn region  mudlleFunctionHelpStr   start=/"/ end=// transparent contains=mudlleString contained nextgroup=mudlleFunctionArgs skipwhite skipempty
 syn match   mudlleFunctionArgs      /\v%(\k+|\(\_[^)]*\))/ contains=mudlleType contained nextgroup=mudlleFunctionBraces skipwhite skipempty
 syn region  mudlleFunctionBraces    start=/\[/ end=// transparent contains=mudlleBracesReg contained fold
@@ -98,7 +99,7 @@ if version >= 508 || !exists("did_mudlle_syn_inits")
   HiLink mudlleOperator         Operator
   HiLink mudlleType             Type
   HiLink mudlleStatement        Statement
-  HiLink mudlleFunction         Function
+  HiLink mudlleFunctionKw       Function
   HiLink mudlleBraces           Function
   HiLink mudlleDoNotLoad        Error
   HiLink mudlleNull             Keyword
