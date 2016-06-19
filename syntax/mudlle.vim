@@ -64,7 +64,8 @@ syn keyword mudlleType              code closure variable internal primitive var
 " Matches 'fn' with a possible return type: int fn, {int,list} fn, fn
 syn match   mudlleFunction          /\v%(%(<\i+>|\{.{-}\})\_s+|<)fn>/ transparent contains=mudlleFunctionKw,mudlleType nextgroup=mudlleFunctionHelpStr,mudlleFunctionArgs skipwhite skipempty
 syn keyword mudlleFunctionKw        fn contained
-syn region  mudlleFunctionHelpStr   start=/"/ end=// transparent contains=mudlleString contained nextgroup=mudlleFunctionArgs skipwhite skipempty
+syn region  mudlleFunctionHelpStr   start=/"/ end=// transparent contains=mudlleString contained nextgroup=mudlleFunctionHelpStrP,mudlleFunctionArgs skipwhite skipempty
+syn match   mudlleFunctionHelpStrP  /+/ transparent contained nextgroup=mudlleFunctionHelpStr skipwhite skipempty
 syn match   mudlleFunctionArgs      /\v%(\k+|\(\_[^)]*\))/ contains=mudlleType contained nextgroup=mudlleFunctionBraces skipwhite skipempty
 syn region  mudlleFunctionBraces    start=/\[/ end=// transparent contains=mudlleBracesReg contained fold
 syn region  mudlleBracesReg         matchgroup=mudlleBraces start=/\[/ end=/\]/ contains=TOP
@@ -92,7 +93,7 @@ if version >= 508 || !exists("did_mudlle_syn_inits")
   HiLink mudlleSpecial          Special
   HiLink mudlleString           String
   HiLink mudlleCharacter        Character
-  HiLink mudlleNumber           String
+  HiLink mudlleNumber           Number
   HiLink mudlleConditional      Conditional
   HiLink mudlleRepeat           Repeat
   HiLink mudlleBranch           Conditional
@@ -102,7 +103,7 @@ if version >= 508 || !exists("did_mudlle_syn_inits")
   HiLink mudlleFunctionKw       Function
   HiLink mudlleBraces           Function
   HiLink mudlleDoNotLoad        Error
-  HiLink mudlleNull             Keyword
+  HiLink mudlleNull             Constant
   HiLink mudlleBoolean          Boolean
 
   HiLink mudlleFnHelpVar        Identifier
