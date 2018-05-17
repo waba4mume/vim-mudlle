@@ -27,7 +27,8 @@ syn case ignore
 
 syn keyword mudlleCommentTodo       TODO FIXME XXX TBD contained
 syn match   mudlleLineComment       "\/\/.*" contains=@Spell,mudlleCommentTodo
-syn region  mudlleComment           start="/\*"  end="\*/" contains=@Spell,mudlleCommentTodo,mudlleComment
+syn region  mudlleComment           start="/\*\({{{\*/\)\@!"  end="\*/\(}}}\*/\)\@!" contains=@Spell,mudlleCommentTodo,mudlleComment
+syn region  manualFoldAreaReg       matchgroup=manualFoldLabel start="/\*{{{\*/" end="/\*}}}\*/" fold contains=TOP
 
 " Files starting with ** are meant to be ignored at boot
 syn match   mudlleDoNotLoad         /\v%^\*\*.*/
@@ -89,6 +90,7 @@ if version >= 508 || !exists("did_mudlle_syn_inits")
   endif
   HiLink mudlleComment          Comment
   HiLink mudlleLineComment      Comment
+  HiLink manualFoldLabel        Tag
   HiLink mudlleCommentTodo      Todo
   HiLink mudlleSpecial          Special
   HiLink mudlleString           String
