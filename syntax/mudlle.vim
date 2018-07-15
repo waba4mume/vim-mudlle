@@ -26,8 +26,12 @@ endif
 syn case ignore
 
 syn keyword mudlleCommentTodo       TODO FIXME XXX TBD contained
-syn match   mudlleLineComment       "\/\/.*" contains=@Spell,mudlleCommentTodo
-syn region  mudlleComment           start="/\*"  end="\*/" contains=@Spell,mudlleCommentTodo,mudlleComment
+" Comments, explicitely not considering fold-marking comments
+syn match   mudlleLineComment       "//\%(\s*\%({{{\|}}}\)\)\@!.*" contains=@Spell,mudlleCommentTodo
+syn region  mudlleComment           start="/\*\%(\s*\%({{{\|}}}\)\)\@!" end="\*/" contains=@Spell,mudlleCommentTodo,mudlleComment
+" Make fold-marking comments a special region, because Vim doesn't like to see
+" regions overlapping like this: start-A start-B end-A start-A end-B end-A
+syn region  mudlleFoldMarkerReg     matchgroup=mudlleFoldMarker start="/\*\s*{{{\s*\*/\|//.*{{{.*" end="/\*\s*}}}\s*\*/\|//.*}}}.*" fold contains=TOP
 
 " Files starting with ** are meant to be ignored at boot
 syn match   mudlleDoNotLoad         /\v%^\*\*.*/
@@ -90,6 +94,7 @@ if version >= 508 || !exists("did_mudlle_syn_inits")
   HiLink mudlleComment          Comment
   HiLink mudlleLineComment      Comment
   HiLink mudlleCommentTodo      Todo
+  HiLink mudlleFoldMarker       Comment
   HiLink mudlleSpecial          Special
   HiLink mudlleString           String
   HiLink mudlleCharacter        Character
